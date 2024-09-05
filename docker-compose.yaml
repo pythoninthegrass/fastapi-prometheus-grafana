@@ -1,19 +1,18 @@
-version: "3.8"
-
 services:
   app:
     build:
       context: ./app
+      dockerfile: Dockerfile
     restart: unless-stopped
     container_name: app
     ports:
       - 8000:8000
     networks:
-      example-network:
+      fastapi-promgraf:
         ipv4_address: 172.16.238.10
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.54.1
     restart: unless-stopped
     container_name: prometheus
     ports:
@@ -21,11 +20,11 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
-      example-network:
+      fastapi-promgraf:
         ipv4_address: 172.16.238.11
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:11.2.0
     container_name: grafana
     restart: unless-stopped
     depends_on:
@@ -37,12 +36,12 @@ services:
     env_file:
       - ./grafana/config.monitoring
     networks:
-      example-network:
+      fastapi-promgraf:
         ipv4_address: 172.16.238.12
 
 networks:
-  example-network:
-    name: example-network
+  fastapi-promgraf:
+    name: fastapi-promgraf
     driver: bridge
     ipam:
       driver: default

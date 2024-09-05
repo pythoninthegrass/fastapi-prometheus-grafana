@@ -7,12 +7,12 @@ This is a minimal setup that you can build to monitor your FastAPI microservice.
 There are only two prerequisites:
 
 * [Docker](https://docs.docker.com/get-docker/)
-* [Docker-compose](https://docs.docker.com/compose/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 Having both, you'll need to clone the repository:
 
 ``` bash
-git clone https://github.com/Kludex/fastapi-prometheus-grafana
+git clone https://github.com/pythoninthegrass/fastapi-prometheus-grafana.git
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ git clone https://github.com/Kludex/fastapi-prometheus-grafana
 You'll need to run the docker containers:
 
 ``` bash
-docker-compose up
+docker compose up -d
 ```
 
 Now you have access to those three containers and their respective ports:
@@ -34,7 +34,7 @@ On the FastAPI, you can access `/metrics` endpoint to see the data Prometheus is
 ## How it looks like
 
 <p align="center">
-  <img src="./dashboard.jpeg">
+  <img src="./static/dashboard.jpeg">
 </p>
 
 ## References

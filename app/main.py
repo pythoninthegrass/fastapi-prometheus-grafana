@@ -1,14 +1,10 @@
+#!/usr/bin/env python
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
-
-
-@app.get("/")
-def home():
-    return "Hello World"
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,4 +15,14 @@ app.add_middleware(
 )
 
 
-Instrumentator().instrument(app).expose(app)
+@app.get("/")
+def home():
+    return "Hello World"
+
+
+def main():
+    Instrumentator().instrument(app).expose(app)
+
+
+if __name__ == "__main__":
+    main()
