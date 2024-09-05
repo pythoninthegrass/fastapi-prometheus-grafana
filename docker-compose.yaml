@@ -10,6 +10,8 @@ services:
     networks:
       fastapi-promgraf:
         ipv4_address: 172.16.238.10
+    depends_on:
+      - prometheus
 
   prometheus:
     image: prom/prometheus:v2.54.1
