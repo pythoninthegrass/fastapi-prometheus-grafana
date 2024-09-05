@@ -1,9 +1,11 @@
-FROM python:3.8
+ARG PYTHON_VERSION=3.11.9
 
-WORKDIR /app/
+FROM python:${PYTHON_VERSION}
+
+WORKDIR /app
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt
 
-CMD uvicorn --host=0.0.0.0 main:app
+CMD ["python", "main.py"]
