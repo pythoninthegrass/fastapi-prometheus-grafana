@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.11.9
 
-FROM python:${PYTHON_VERSION}
+FROM python:${PYTHON_VERSION}-slim-bullseye
 
 WORKDIR /app
 
