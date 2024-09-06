@@ -45,7 +45,7 @@ services:
         ipv4_address: 172.16.238.12
 
   loki:
-    image: grafana/loki:2.9.2
+    image: grafana/loki:3.0.1
     container_name: loki
     ports:
       - "3100:3100"
@@ -55,7 +55,7 @@ services:
         ipv4_address: 172.16.238.13
 
   promtail:
-    image: grafana/promtail:2.9.2
+    image: grafana/promtail:2.9.10
     container_name: promtail
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
