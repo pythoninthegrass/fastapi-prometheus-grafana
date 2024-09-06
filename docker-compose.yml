@@ -5,6 +5,9 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: app
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
     ports:
       - 8000:8000
     networks:
@@ -40,6 +43,28 @@ services:
     networks:
       fastapi-promgraf:
         ipv4_address: 172.16.238.12
+
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      fastapi-promgraf:
+        ipv4_address: 172.16.238.13
+
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: promtail
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./promtail/promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      fastapi-promgraf:
+        ipv4_address: 172.16.238.14
 
 networks:
   fastapi-promgraf:
